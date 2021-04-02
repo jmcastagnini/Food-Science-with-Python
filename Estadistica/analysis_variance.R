@@ -1,6 +1,7 @@
-analysis_variance <- function(df,analysis,treatment){
+analysis_variance <- function(df_r,analysis,treatment){
 	library(agricolae)
-    A <- read.csv2(df,header = TRUE, dec = ".")  # Open the file and read the data 
+    #A <- read.csv2(df,header = TRUE, dec = ".")  # Open the file and read the data 
+    A <- df_r
     A[ , c(analysis)] <- as.numeric(A[ , c(analysis)])  # Change the data type to numeric
     m1 <- aov(as.formula(paste(analysis, '~',colnames(A)[treatment])), data = A)  # Make a linear model for the Post-hoc test
     out1 <- HSD.test(m1,colnames(A)[treatment],console = FALSE)  # Make the analysis of variance by Groups=Treatments
